@@ -1,15 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Program.css';
-import Main from '../MainPage/Main'
 import Navi from '../Navi'
+import SideNav from './SideNav';
+import ProgramDisplay from './ProgramDisplay';
 
-function Program(){
-    return(
+function Program() {
+    const [state, setState] = useState("new");
+    return (
         <div>
-            <Navi></Navi>
-            
+            <Navi />
+            <div className='MPSideNavFlexBox'>
+                <SideNav setDisplay={setState} />
+                <div>
+                    <ProgramDisplay displayState={state} />
+                </div>
+            </div>
         </div>
-        
+
     )
 }
 

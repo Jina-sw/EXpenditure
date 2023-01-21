@@ -1,0 +1,30 @@
+.mainProgramSideNav {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #e7eaf6;
+    max-width: 400px;
+    /* Need to Change this height to 100% after 
+    main program implementation */
+    height: 100vh;
+}
+
+.MPSideNavButtons{
+    color: black;
+    cursor: pointer;
+    width: 100%;
+
+    padding: 60px 40px;
+    font-weight: 500;
+    letter-spacing: 2.5px;
+    margin-bottom: 30px;
+}
+
+.MPSideNavButtons:hover{
+    background-color: #a2a8d3;
+}
+
+.MPSideNavButtonSelected {
+    background-color: #113f67;
+}
