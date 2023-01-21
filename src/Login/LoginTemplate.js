@@ -9,7 +9,10 @@ const Login = (props) => {
     const [userId, setUserId] = useState("");
 
     const onSubmitForm = async (e) => {
+        console.log(userId);
         e.preventDefault();
+        e.stopPropagation();
+        e.nativeEvent.stopImmediatePropagation();
         try {
             const body = { userId }
             const response = await fetch("http://localhost:5000/users", {
@@ -23,26 +26,38 @@ const Login = (props) => {
         } catch (err) {
             console.error("here err" + err.message);
         }
+
+        return false;
     }
 
     const signup = (
         <div>
             <Navi />
-            <InputGroup className='mb-3'>
-                <InputGroup.Text id="basic-addon1" >@</InputGroup.Text>
-                <Form.Control
-                    placeholder="Username"
-                    aria-label="Username"
-                    aria-describedby="basic-addon1"
-                    value={userId} 
-                    
-                    onChange={e => setUserId(e.target.value)}
-                    
-                />
-                
-                <Button type="submit" onSubmit={onSubmitForm}>Submit</Button>
-                
-            </InputGroup>
+            
+            <Form>
+                <Form.Group className="mb-3" controlId="formGroupEmail">
+                    <Form.Label>Email address</Form.Label>
+                    <Form.Control type="email" placeholder="Enter email" value={userId} 
+                    onChange={e => setUserId(e.target.value)}/>
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="formGroupPassword">
+                    <Form.Label>Password</Form.Label>
+                    <Form.Control type="password" placeholder="Password" />
+                </Form.Group>
+                <Button type="submit" className="mb-2"  onSubmit={onSubmitForm}>
+                    Submit
+                </Button>
+            </Form>
+
+            <form>
+                <input type="text" value={userId} 
+                    onChange={e => setUserId(e.target.value)}>
+                </input>
+                <button type="submit" onSubmit={onSubmitForm}>submit</button>
+            </form>
+    
+            
+            
             
             <InputGroup className="mb-3">
                 <Form.Control
@@ -126,3 +141,21 @@ const Login = (props) => {
 };
 
 export default Login;
+
+{/* <Form>
+                <InputGroup className='mb-3'>
+                    <InputGroup.Text id="basic-addon1" >@</InputGroup.Text>
+                    <Form.Control
+                        placeholder="Username"
+                        aria-label="Username"
+                        aria-describedby="basic-addon1"
+                        value={userId} 
+                        
+                        onChange={e => setUserId(e.target.value)}
+                        
+                    />
+                    <Button type="submit" onSubmit={onSubmitForm}>Submit</Button>
+                    
+                    
+                </InputGroup>
+            </Form> */}
