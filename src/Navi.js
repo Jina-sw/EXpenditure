@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+import { LinkContainer } from 'react-router-bootstrap';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
@@ -32,8 +33,12 @@ const Navi = () => {
                 </NavDropdown>
               </Nav>
             </Navbar.Collapse>
-            <Button className="SI" variant="light">Sign In</Button>
-            <Button className="SU" variant="light">Sign Up</Button>
+            <LinkContainer to="/signin">
+              <Button className="SI" variant="light">Sign In</Button>
+            </LinkContainer>
+            <LinkContainer to="/signup">
+              <Button className="SU" variant="light">Sign Up</Button>
+            </LinkContainer>
           </Container>
         </Navbar>
 
