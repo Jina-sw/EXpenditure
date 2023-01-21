@@ -16,9 +16,9 @@ const Login = (props) => {
         try {
             const body = { userId }
             const response = await fetch("http://localhost:5000/users", {
-                method: "POST",
-                headers: {"Content-Type":"application/json"},
-                body: JSON.stringify(body)
+                "method": "POST",
+                "headers": {"Content-Type":"application/json"},
+                "body": JSON.stringify(body)
             });
 
             console.log("here" + response);
@@ -34,7 +34,7 @@ const Login = (props) => {
         <div>
             <Navi />
             
-            <Form>
+            <Form onSubmit={onSubmitForm}>
                 <Form.Group className="mb-3" controlId="formGroupEmail">
                     <Form.Label>Email address</Form.Label>
                     <Form.Control type="email" placeholder="Enter email" value={userId} 
@@ -44,16 +44,16 @@ const Login = (props) => {
                     <Form.Label>Password</Form.Label>
                     <Form.Control type="password" placeholder="Password" />
                 </Form.Group>
-                <Button type="submit" className="mb-2"  onSubmit={onSubmitForm}>
+                <Button type="submit" className="mb-2">
                     Submit
                 </Button>
             </Form>
 
-            <form>
+            <form onSubmit={onSubmitForm}>
                 <input type="text" value={userId} 
                     onChange={e => setUserId(e.target.value)}>
                 </input>
-                <button type="submit" onSubmit={onSubmitForm}>submit</button>
+                <button type="submit">submit</button>
             </form>
     
             
