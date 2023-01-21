@@ -1,0 +1,8 @@
+CREATE DATABASE DB;
+
+CREATE TABLE userInfo (
+    id SERIAL PRIMARY KEY,
+    userID VARCHAR(255),
+    userPW VARCHAR(255)
+);
+
