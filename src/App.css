@@ -1,0 +1,54 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=DM+Serif+Display:ital@0;1&family=Frank+Ruhl+Libre:wght@500;800&family=Tiro+Bangla&display=swap');
+
+.area {
+  background-color: rgb(18, 44, 92);
+  width : 100%;
+  min-height : 20rem; 
+  display: flex;
+  flex-direction :column;
+  justify-content: space-evenly;
+}
+
+.signButton {
+  
+  width : fit-content;
+  margin: 2rem;
+  
+}
+
+.slogan {
+  padding : 1.5rem;
+  color: white;
+  margin-left: 0.5rem;
+  font-weight: 500;
+  font-size: 3rem;
+
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem;
+  
+  padding-right: 1.5rem;
+}
+
+.SUI {
+  display: flex;
+  justify-content: space-evenly;
+  
+}
+
+.logo {
+  font-family: 'DM Serif Display';
+  font-weight: 900;
+  font-size: 35px;
+  padding-left:2rem;
+}
+
+.SI,.SU {
+  margin: 0.5rem;
+}
+
+
