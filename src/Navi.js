@@ -32,8 +32,12 @@ const Navi = () => {
                 </NavDropdown>
               </Nav>
             </Navbar.Collapse>
-            <Button className="SI" variant="light">Sign In</Button>
-            <Button className="SU" variant="light">Sign Up</Button>
+            <LinkContainer to="/signin">
+              <Button className="SI" variant="light">Sign In</Button>
+            </LinkContainer>
+            <LinkContainer to="/signup">
+              <Button className="SU" variant="light">Sign Up</Button>
+            </LinkContainer>
           </Container>
         </Navbar>
 

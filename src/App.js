@@ -2,6 +2,8 @@ import React from 'react';
 import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import MainPage from './MainPage/MainPage';
+import SignUp from './Login/SignUp';
+import SignIn from './Login/SignIn';
 
 
 function App() {
@@ -10,6 +12,8 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" exact element={<MainPage />} />
+          <Route path="/signup" exact element={<SignUp/>} />
+          <Route path="/signin" exact element={<SignIn/>} />
 
         </Routes>
       </BrowserRouter>

@@ -1,17 +1,20 @@
 import react from 'react';
 import Button from 'react-bootstrap/Button'
+import { LinkContainer } from 'react-router-bootstrap';
 import '../App.css';
 import './Main.css';
 import Info from '../MainPage/Info.js'
-function Main(){
-    return(
+function Main() {
+    return (
         <div>
             <div className="area">
                 <div className="slogan">EXpenditure, <br></br>Your Best Finacial Support</div>
-                <Button variant="warning" className="signButton">Sign In</Button>
-                
+                <LinkContainer to="/signin">
+                    <Button variant="warning" className="signButton">Sign In</Button>
+                </LinkContainer>
+
             </div>
-            <Info/>
+            <Info />
         </div>
     )
 }
