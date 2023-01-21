@@ -1,14 +1,7 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=DM+Serif+Display:ital@0;1&family=Frank+Ruhl+Libre:wght@500;800&family=Tiro+Bangla&display=swap');
 
-.area {
-  background-color: rgb(18, 44, 92);
-  width : 100%;
-  min-height : 20rem; 
-  display: flex;
-  flex-direction :column;
-  justify-content: space-evenly;
-}
+
 
 .signButton {
   
@@ -17,14 +10,6 @@
   
 }
 
-.slogan {
-  padding : 1.5rem;
-  color: white;
-  margin-left: 0.5rem;
-  font-weight: 500;
-  font-size: 3rem;
-
-}
 
 .nav {
   display: flex;

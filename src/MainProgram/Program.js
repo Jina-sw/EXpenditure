@@ -1,6 +1,6 @@
 import React from 'react';
 import './Program.css';
-import Main from '../Main'
+import Main from '../MainPage/Main'
 import Navi from '../Navi'
 
 function Program(){
