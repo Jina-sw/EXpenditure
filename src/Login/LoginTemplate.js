@@ -1,21 +1,49 @@
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Navi from '../Navi';
+import react, { useState } from 'react';
+import Button from 'react-bootstrap/Button';
 
 const Login = (props) => {
+
+    const [userId, setUserId] = useState("");
+
+    const onSubmitForm = async (e) => {
+        e.preventDefault();
+        try {
+            const body = { userId }
+            const response = await fetch("http://localhost:5000/users", {
+                method: "POST",
+                headers: {"Content-Type":"application/json"},
+                body: JSON.stringify(body)
+            });
+
+            console.log("here" + response);
+            
+        } catch (err) {
+            console.error("here err" + err.message);
+        }
+    }
 
     const signup = (
         <div>
             <Navi />
             <InputGroup className='mb-3'>
-                <InputGroup.Text id="basic-addon1">@</InputGroup.Text>
+                <InputGroup.Text id="basic-addon1" >@</InputGroup.Text>
                 <Form.Control
                     placeholder="Username"
                     aria-label="Username"
                     aria-describedby="basic-addon1"
+                    value={userId} 
+                    
+                    onChange={e => setUserId(e.target.value)}
+                    
                 />
+                
+                <Button type="submit" onSubmit={onSubmitForm}>Submit</Button>
+                
             </InputGroup>
-
+            
             <InputGroup className="mb-3">
                 <Form.Control
                     placeholder="Recipient's username"
