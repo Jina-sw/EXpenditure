@@ -12,9 +12,9 @@ app.use(express.json()); //req.body
 //create a userinfo
 app.post("/users", async(req, res)=> {
     try{
-        const { description } = req.body;
-        const newUser = await pool.query("INSERT INTO userInfo(userID) VALUES($1) RETURNING *", 
-        [description]
+        const { userid } = req.body;
+        const newUser = await pool.query("INSERT INTO userInfo(userid) VALUES($1) RETURNING *", 
+        [userid]
     );
 
     res.json(newUser.rows[0]);
@@ -23,6 +23,7 @@ app.post("/users", async(req, res)=> {
         console.error(err.message);
     }
 })
+
 //get all userinfos
 app.get("/users", async(req,res) => {
     try {
