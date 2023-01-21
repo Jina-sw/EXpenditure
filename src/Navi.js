@@ -12,7 +12,9 @@ const Navi = () => {
 
   return (
     <div className="nav">
-      <div className="logo">EXpenditure</div>
+      <LinkContainer to="/">
+        <div className="logo">EXpenditure</div>
+      </LinkContainer>
       <div className="SUI">
         <Navbar bg="light" expand="lg" className="menu">
           <Container>
