@@ -30,7 +30,7 @@
   display: flex;
   justify-content: space-between;
   padding: 0.5rem;
-  
+  background-color: rgba(213, 213, 246, 0.512);
   padding-right: 1.5rem;
 }
 
