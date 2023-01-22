@@ -1,5 +1,6 @@
 import react from 'react';
 import first from '../assets/first.png'
+import second from '../assets/second.PNG'
 
 
 
@@ -13,13 +14,13 @@ function info() {
             <div className="content_container">
             <p className="content_title">Here Is What We Offer For You</p>
                 <div className="drawer">
-                    <p className="content_title">Firstly,<br/> click on one of the buttons at the right top</p>
+                    <p className=""><span className="boldText">Firstly,</span><br/> click on one of the buttons at the right top</p>
                     <img src={first} width="80%"></img>
                 </div>
-
+                <br></br>
                 <div className="drawer">
-                    <p className="content_title"><br/> Next, sign in or newly sign up to start <span>EXpenditure</span></p>
-                    
+                    <p className=""><br/> <span className='boldText'>Next,</span> sign in or newly sign up to start<span className='logoN'>EXpenditure</span></p>
+                    <img src={second} width="80%"></img>
                 </div>
                 
             </div>

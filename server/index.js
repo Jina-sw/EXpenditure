@@ -111,6 +111,19 @@ app.post("/expenses", async (req, res) => {
     }
 })
 
+app.put("/expenses/:id", async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { userid } = req.body;
+        const updateTodo = await pool.query(
+            "UPDATE userinfo SET userid = $1 WHERE id = $2", [userid, id]);
+
+        res.json("User Id was updated!");
+    } catch (err) {
+        console.error(err.message);
+    }
+})
+
 app.listen(5000, () => {
     console.log("server has started on port 5000")
 });

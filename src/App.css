@@ -22,7 +22,7 @@
 .SUI {
   display: flex;
   justify-content: space-evenly;
-  
+  border-radius: 10px; 
 }
 
 .logo {
@@ -40,4 +40,22 @@
   color: #d5bdaf;
 }
 
+@media only screen and (max-width: 800px) {
+  .nav{
+    display: flex;
+    flex-direction: column;
+  }
 
+  .logoPointerCursor{
+    text-align:center;
+    padding: 2rem;
+    margin-left: 1rem;
+  }
+
+  .SUI {
+    margin-left: 1rem;
+    margin-bottom: 1rem;
+  }
+
+
+}
