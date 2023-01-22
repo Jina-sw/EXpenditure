@@ -4,6 +4,7 @@ import Form from 'react-bootstrap/Form';
 import { useState } from 'react';
 import NewEx from './NewEx';
 import EditEx from './EditEx';
+import MEXDisplay from './MEXDisplay';
 
 const ProgramDisplay = (props) => {
     
@@ -19,7 +20,7 @@ const ProgramDisplay = (props) => {
         display = <EditEx/>;
     } else {
         // setDisplay(monitorEx);
-        display = <NewEx/>;
+        display = <MEXDisplay/>;
     }
 
     return (
