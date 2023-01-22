@@ -1,3 +1,30 @@
 .MPSideNavFlexBox{
     display: flex;
 }
+
+.PD_Container{
+    padding: 5vh 0rem 0 3vw;
+}
+
+.PD_Content{
+    background-color: #a2a8d3;
+    width: 70vw;
+    height: 70vh;
+    padding: 3vh 5vw;
+}
+
+.EXH1{
+    font-size: 20px;
+    letter-spacing: 2px;
+}
+
+.EXH2{
+    font-size: 16px;
+    letter-spacing: 1px;
+}
+
+.MEXGrid{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 2vw;
+}
