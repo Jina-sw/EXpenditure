@@ -24,10 +24,10 @@ const MonitorEx = (props) => {
             </h1>
             {icon}
             <div>
-                <h2 className='MEXPricings'>
+                <h2 className='MEXPricings price'>
                     {`$ ${props.amount}`}
                 </h2>
-                <h2 className='MEXPricings'>
+                <h2 className='MEXPricings desc'>
                     {`${(props.amount / props.total) * 100} % of the total expense`}
                 </h2>
             </div>

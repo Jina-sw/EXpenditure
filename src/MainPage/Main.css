@@ -81,6 +81,11 @@ img {
     
 }
 
+.space {
+    padding: 3rem;
+}
+
+
 @media only screen and (max-width: 800px) {
     .drawer {
         display: flex;

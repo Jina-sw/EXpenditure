@@ -11,6 +11,7 @@ const EditEx = () => {
             <h2 className='EXH2'>
                 Make sure to enter the correct product name and edit price and type of the expense.
             </h2>
+            <br/>
             <Form>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Product Name</Form.Label>
