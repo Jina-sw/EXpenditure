@@ -52,6 +52,7 @@ app.get("/users/:id", async (req, res) => {
         if (!(user.rows[0])) {
             res.json({ message: "User does not exist" });
         } else {
+            console.log(user.rows[0]);
             res.json(user.rows[0]);
         }
     } catch (err) {
@@ -120,17 +121,19 @@ app.get("/expensesAmount/:userId", async (req, res) => {
         let mAmount = 0;
         let total = 0;
 
-        const user = await pool.query("SELECT * FROM expense WHERE userid = $1", [id1]);
-        console.log(user.rows[0]);
         console.log(id1);
-        if (!(user.rows[0])) {
+
+        const user = await pool.query("SELECT * FROM expense WHERE userid = $1", [{ id1 }]);
+        if (!(user.rows)) {
             res.json({ message: "None" });
         } else {
             const fQuery = await pool.query("SELECT amount FROM expense WHERE userid = $1 AND type = $2", [id1, "Food"]);
             let i = 0;
-            while (fQuery.rows) {
-                fAmount += fQuery.rows[i];
-                console.log(fQuery.rows[i]);
+            console.log(fQuery.rows[0]);
+
+            while (fQuery.rows.amount) {
+                fAmount += fQuery.rows[i].amount;
+                console.log(fQuery.rows[i].amount);
                 i += 1;
             }
             res.json({ message: fAmount });

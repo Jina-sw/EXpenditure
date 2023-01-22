@@ -6,11 +6,19 @@ import SignUp from './Login/SignUp';
 import SignIn from './Login/SignIn';
 import Program from './MainProgram/Program';
 import { LoginContext } from './Contexts/LoginContext';
+import { calculateContext } from './Contexts/calculateContext';
 
 
 function App() {
 
   const [isLoggedIn, setLoggedIn] = useState(false);
+  const [calculate, setCaculate] = useState({
+    fAmount: 0,
+    aAmount: 0,
+    rAmount: 0,
+    mAmount: 0,
+    total: 0
+  });
 
   useEffect(() => {
     const loginInfo = localStorage.getItem('login');
@@ -22,15 +30,17 @@ function App() {
   return (
     <div>
       <LoginContext.Provider value={{ isLoggedIn, setLoggedIn }}>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" exact element={<MainPage />} />
-            <Route path="/signup" exact element={<SignUp />} />
-            <Route path="/signin" exact element={<SignIn />} />
-            <Route path="/mainprogram" element={<Program />} />
+        <calculateContext.Provider value={{ calculate, setCaculate }}>
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" exact element={<MainPage />} />
+              <Route path="/signup" exact element={<SignUp />} />
+              <Route path="/signin" exact element={<SignIn />} />
+              <Route path="/mainprogram" element={<Program />} />
 
-          </Routes>
-        </BrowserRouter>
+            </Routes>
+          </BrowserRouter>
+        </calculateContext.Provider>
       </LoginContext.Provider>
     </div >
   );
