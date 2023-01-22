@@ -12,7 +12,12 @@ import { LoginContext } from './Contexts/LoginContext';
 
 const Navi = () => {
 
-  const { isLoggedIn } = useContext(LoginContext);
+  const { isLoggedIn, setLoggedIn } = useContext(LoginContext);
+
+  const logout = () => {
+    setLoggedIn(false);
+    localStorage.setItem("login", 'false');
+  };
 
   const loggedIn = (
     <div>
@@ -25,7 +30,7 @@ const Navi = () => {
             <NavDropdown.Item href="#action/3.2">
               Another action
             </NavDropdown.Item>
-            <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
+            <NavDropdown.Item href="#action/3.3" onClick={logout}>Log Out</NavDropdown.Item>
             <NavDropdown.Divider />
             <LinkContainer to="/mainprogram">
               <NavDropdown.Item href="#action/3.4">
