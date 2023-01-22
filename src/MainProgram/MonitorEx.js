@@ -11,7 +11,7 @@ const MonitorEx = (props) => {
         icon = <GiFoodTruck className='MEXIcon' />;
     } else if (props.icon == "Clothes") {
         icon = <GiClothesline className='MEXIcon' />;
-    } else if (props.icon == "House") {
+    } else if (props.icon == "Rent") {
         icon = <GiBlockHouse className='MEXIcon' />;
     } else {
         icon = <MdMiscellaneousServices className='MEXIcon' />;

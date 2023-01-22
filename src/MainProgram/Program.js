@@ -5,7 +5,11 @@ import SideNav from './SideNav';
 import ProgramDisplay from './ProgramDisplay';
 
 function Program() {
+    
     const [state, setState] = useState("new");
+
+    
+
     return (
         <div>
             <Navi />

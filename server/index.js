@@ -94,12 +94,9 @@ app.post("/expenses", async (req, res) => {
         const type = req.body.type;
         const userName = req.body.userid;
 
-        console.log(req.body.type);
-
         const foundUser = await pool.query("SELECT * FROM expense WHERE userid = $1 AND title = $2",
             [userName, title]
         );
-        console.log(foundUser.rows[0]);
         if (foundUser.rows[0] == undefined) {
             const newList = await pool.query("INSERT INTO expense(type, title, amount, userid) VALUES($1, $2, $3, $4) RETURNING *",
                 [type, title, amount, userName]
@@ -113,6 +110,35 @@ app.post("/expenses", async (req, res) => {
         console.log(err.message);
     }
 })
+
+app.get("/expensesAmount/:userId", async (req, res) => {
+    try {
+        const { id1 } = req.params;
+        let fAmount = 0;
+        let cAmount = 0;
+        let rAmount = 0;
+        let mAmount = 0;
+        let total = 0;
+
+        const user = await pool.query("SELECT * FROM expense WHERE userid = $1", [id1]);
+        console.log(user.rows[0]);
+        console.log(id1);
+        if (!(user.rows[0])) {
+            res.json({ message: "None" });
+        } else {
+            const fQuery = await pool.query("SELECT amount FROM expense WHERE userid = $1 AND type = $2", [id1, "Food"]);
+            let i = 0;
+            while (fQuery.rows) {
+                fAmount += fQuery.rows[i];
+                console.log(fQuery.rows[i]);
+                i += 1;
+            }
+            res.json({ message: fAmount });
+        }
+    } catch (err) {
+        console.log(err.message);
+    }
+});
 
 app.put("/expenses/:id", async (req, res) => {
     try {

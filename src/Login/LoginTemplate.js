@@ -71,7 +71,6 @@ const Login = (props) => {
         let body2 = loginPw;
 
         const login = await axios.get(url + `/${body1}`);
-        console.log(login.data.userpw);
         if (login.data.userpw == body2) {
             loginHandler();
         } else if (login.data.message == "User does not exist") {

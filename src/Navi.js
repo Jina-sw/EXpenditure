@@ -17,6 +17,7 @@ const Navi = () => {
   const logout = () => {
     setLoggedIn(false);
     localStorage.setItem("login", 'false');
+    localStorage.setItem("username", "");
   };
 
   const loggedIn = (

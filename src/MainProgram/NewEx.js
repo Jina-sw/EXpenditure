@@ -16,7 +16,7 @@ const NewEx = () => {
     const userInfo = localStorage.getItem("username");
 
     const onChangeOption = (e) => {
-        console.log(e.target.value);
+        setTypeOp(e.target.value);
     }
 
     const onSubmitForm = async (e) => {
@@ -28,7 +28,12 @@ const NewEx = () => {
             type: typeOp,
             userid: userInfo
         }).then(res => {
-            console.log(res.data.message);
+            if(res.data.message == "Success"){
+                alert("Successfully Added!");
+            }else{
+                alert(res.data.message);
+            }
+            // console.log(res.data.message);
         }).catch(err => {
             console.log(err);
         })
@@ -68,9 +73,9 @@ const NewEx = () => {
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicCheckbox">
                     <Form.Label className="t">Expense Type</Form.Label>
-                    <Form.Select aria-label="Default select example" onChange={onChangeOption} >
+                    <Form.Select aria-label="Default select example" defaultValue="Food" onChange={onChangeOption} >
                         <option value="Food">Food</option>
-                        <option value="apparel">Apparel</option>
+                        <option value="Apparel">Apparel</option>
                         <option value="Housing">Housing</option>
                         <option value="Misc">Misc</option>
                     </Form.Select>
