@@ -7,7 +7,7 @@ const pool = require("./db");
 app.use(cors());
 app.use(express.json()); //req.body
 
-//ROUTES//
+//ROUTES for the user table//
 
 //create a userinfo
 app.post("/users", async (req, res) => {
@@ -73,6 +73,28 @@ app.delete("/users/:id", async (req, res) => {
     }
 })
 
+//ROUTES for the expense table
+//save a expense
+app.post("/expenses", async (req, res) => {
+    try {
+        const amount  = req.body.amount;
+        //const title = req.body.title;
+        const newAmount = await pool.query("INSERT INTO expense(amount) VALUES($1) RETURNING *",
+            [amount]
+        );
+        // const newTitle = await pool.query("INSERT INTO expense(title) VALUES($1) RETURNING *",
+        //     [title]
+        // );
+        
+
+        res.json(newAmount.rows[0]);
+        //res.json(newTitle.rows[0]);
+        // res.json({message: newUser.rows[0]});
+
+    } catch (err) {
+        console.log(err.message);
+    }
+})
 
 app.listen(5000, () => {
     console.log("server has started on port 5000")

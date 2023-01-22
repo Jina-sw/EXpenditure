@@ -1,8 +1,37 @@
 import './Program.css';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import axios from 'axios';
+import { useState } from 'react';
 
 const NewEx = () => {
+
+    const [amountNum, setAmountNum] = useState(0);
+
+    const onSubmitForm = async (e) => {
+        console.log(amountNum);
+        e.preventDefault();
+     
+       
+            
+        const response = await axios.post("http://localhost:5000/expenses", {
+                amount: amountNum
+            }).then(res=>{
+                console.log(res.data);
+                
+            }).catch(err=> {
+                console.log(err);
+            })
+
+            console.log("here " + response);
+            
+        
+
+        setAmountNum(0);
+
+        
+    }
+
     return (
         <div>
             <h1 className='EXH1'>
@@ -11,7 +40,7 @@ const NewEx = () => {
             <h2 className='EXH2'>
                 Add new expense!
             </h2>
-            <Form>
+            <Form onSubmit={onSubmitForm}>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Product Name</Form.Label>
                     <Form.Control className="PD_FormInputs" type="text" placeholder="Product Name" />
@@ -22,7 +51,7 @@ const NewEx = () => {
 
                 <Form.Group className="mb-3" controlId="formBasicPassword">
                     <Form.Label>Price Amount</Form.Label>
-                    <Form.Control type="number" placeholder="12.99" />
+                    <Form.Control type="number" placeholder="12.99" value={amountNum} onChange={(e) => setAmountNum(e.target.value)}></Form.Control>
                     <Form.Text className="text-muted">
                         Enter the price of the item
                     </Form.Text>
