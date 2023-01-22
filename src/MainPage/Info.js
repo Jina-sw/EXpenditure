@@ -25,7 +25,7 @@ function info() {
                 </div>
                 <div className="space"> </div>
                 <div className="drawer">
-                    <p className=""><br/> <span className='boldText'>And then,</span> Go into program, Enjoy! <span className='logoN'>EXpenditure</span></p>
+                    <p className=""><br/> <span className='boldText'>And then,</span> Go into program, Enjoy <span className='logoN'>EXpenditure</span>!</p>
                     <img src={third} width="80%"></img>
                 </div>
                 
