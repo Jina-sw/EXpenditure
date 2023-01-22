@@ -21,7 +21,7 @@ const Login = (props) => {
 
         let body1 = userId;
         let body2 = userPw;
-        
+
         const response = await axios.post("http://localhost:5000/users", {
             userId: body1,
             userPw: body2
@@ -93,7 +93,7 @@ const Login = (props) => {
 
     return (
         <div>
-            {props.data ? signup : signin}
+            {props.data ? signin : signup}
         </div>
     );
 
