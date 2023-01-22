@@ -1,12 +1,17 @@
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Navi from '../Navi';
-import react, { useState } from 'react';
+import react, { useContext, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import axios from "axios";
 import './Login.css';
+import { useNavigate } from 'react-router-dom'
+import { LoginContext } from '../Contexts/LoginContext';
 
 const Login = (props) => {
+
+    //Login Context
+    const { isLoggedIn, setLoggedIn } = useContext(LoginContext);
 
     //sign up credentials
     const [userId, setUserId] = useState("");
@@ -14,34 +19,59 @@ const Login = (props) => {
 
     //sign in credentials
     const [loginId, setLoginId] = useState("");
+    const [loginPw, setLoginPw] = useState("");
+
+    //Navigate constant
+    const navigate = useNavigate();
+
+    const loginHandler = () => {
+        setLoggedIn(true);
+        localStorage.setItem('login', 'true');
+        localStorage.setItem('username', loginId);
+        navigate("/");
+    };
+
+
+    const url = "http://localhost:5000/users";
 
     const onSignUpForm = async (e) => {
-        console.log(userId);
         e.preventDefault();
 
         let body1 = userId;
         let body2 = userPw;
 
-        const response = await axios.post("http://localhost:5000/users", {
+        const response = await axios.post(url, {
             userId: body1,
             userPw: body2
         }).then(res => {
-            console.log(res.data);
-
+            if (res.data.message == "User exists!") {
+                alert("User exists! Please try a different username");
+                setUserId("");
+                setUserPw("");
+            } else {
+                navigate("/signin");
+                alert("Welcome! Successfully signed up using provided credentials. \n Redirecting to our sign -in page...");
+            }
         }).catch(err => {
             console.log(err);
         })
-
-        console.log("here " + response);
-
-
-
-        setUserId("");
-
-        //return false;
     };
 
-    const onSignInForm = () => {
+    const onSignInForm = async (e) => {
+        e.preventDefault();
+
+        let body1 = loginId;
+        let body2 = loginPw;
+
+        const login = await axios.get(url + `/${body1}`);
+        console.log(login.data.userpw);
+        if (login.data.userpw == body2) {
+            loginHandler();
+        } else if (login.data.message == "User does not exist") {
+            alert("Incorrect username! Please check again");
+        } else {
+            alert("Incorrect password! Please check again");
+        }
 
     };
 
@@ -50,6 +80,7 @@ const Login = (props) => {
             <Navi />
             <div className='SignInContainer'>
                 <Form onSubmit={onSignUpForm}>
+                    <h1 className='SignInHeading'>Sign Up</h1>
                     <Form.Group className="mb-3" controlId="formGroupEmail">
                         <Form.Label>Username</Form.Label>
                         <Form.Control type="text" placeholder="Enter username" value={userId}
@@ -73,6 +104,7 @@ const Login = (props) => {
             <Navi />
             <div className='SignInContainer'>
                 <Form onSubmit={onSignInForm}>
+                    <h1 className='SignInHeading'>Sign In</h1>
                     <Form.Group className="mb-3" controlId="formGroupEmail">
                         <Form.Label>Username</Form.Label>
                         <Form.Control type="text" placeholder="Enter username" value={loginId}
@@ -80,7 +112,8 @@ const Login = (props) => {
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="formGroupPassword">
                         <Form.Label>Password</Form.Label>
-                        <Form.Control type="password" placeholder="Password" />
+                        <Form.Control type="password" placeholder="Password"
+                            onChange={e => setLoginPw(e.target.value)} />
                     </Form.Group>
                     <Button type="submit" className="mb-2">
                         Sign In

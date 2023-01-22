@@ -6,3 +6,9 @@
     padding: 10vh 15vw 10vh 15vw;
     background-color: #e7eaf6;
 }
+
+.SignInHeading {
+    letter-spacing: 1px;
+    font-size: 4.5vw;
+    margin-bottom: 3vh;
+}

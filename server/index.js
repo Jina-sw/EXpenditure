@@ -14,11 +14,19 @@ app.post("/users", async (req, res) => {
     try {
         const userid = req.body.userId;
         const userpw = req.body.userPw;
-        const newUser = await pool.query("INSERT INTO userInfo(userid, userpw) VALUES($1, $2) RETURNING *",
-            [userid, userpw]
-        );
 
-        res.json(newUser.rows[0]);
+        const existingUser = await pool.query("SELECT * FROM userInfo WHERE userid = $1", [userid]);
+        console.log(existingUser);
+        if (existingUser.rows[0]) {
+            res.json({ message: "User exists!" });
+        } else {
+
+            const newUser = await pool.query("INSERT INTO userInfo(userid, userpw) VALUES($1, $2) RETURNING *",
+                [userid, userpw]
+            );
+
+            res.json({ message: newUser.rows[0] + "Success!"});
+        }
         // res.json({message: newUser.rows[0]});
 
     } catch (err) {
@@ -41,8 +49,13 @@ app.get("/users", async (req, res) => {
 app.get("/users/:id", async (req, res) => {
     try {
         const { id } = req.params;
-        const user = await pool.query("SELECT * FROM userinfo WHERE id = $1", [id]);
-        res.json(user.rows);
+        const user = await pool.query("SELECT userpw FROM userinfo WHERE userid = $1", [id]);
+        if(!(user.rows[0])){
+            res.json({message: "User does not exist"});
+        }else{
+            res.json(user.rows[0]);
+        }
+        // console.log(user.rows[0]);
     } catch (err) {
         console.log(err.message);
     }
@@ -78,7 +91,7 @@ app.delete("/users/:id", async (req, res) => {
 //save a expense
 app.post("/expenses", async (req, res) => {
     try {
-        const amount  = req.body.amount;
+        const amount = req.body.amount;
         const title = req.body.title;
         const type = req.body.type;
         const newList = await pool.query("INSERT INTO expense(type, title, amount) VALUES($1, $2, $3) RETURNING *",
@@ -87,7 +100,7 @@ app.post("/expenses", async (req, res) => {
         // const newTitle = await pool.query("INSERT INTO expense(title) VALUES($1) RETURNING *",
         //     [title]
         // );
-        
+
 
         res.json(newAmount.rows[0]);
         res.json(newTitle.rows[0]);
