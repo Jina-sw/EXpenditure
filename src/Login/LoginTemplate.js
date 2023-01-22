@@ -3,6 +3,7 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import Navi from '../Navi';
 import react, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
+import axios from "axios";
 
 const Login = (props) => {
 
@@ -11,23 +12,28 @@ const Login = (props) => {
     const onSubmitForm = async (e) => {
         console.log(userId);
         e.preventDefault();
-        e.stopPropagation();
-        e.nativeEvent.stopImmediatePropagation();
-        try {
-            const body = { userId }
-            const response = await fetch("http://localhost:5000/users", {
-                "method": "POST",
-                "headers": {"Content-Type":"application/json"},
-                "body": JSON.stringify(body)
-            });
+        //e.stopPropagation();
+        //e.nativeEvent.stopImmediatePropagation();
+        
+        let body1 = userId;
+            //body1 = JSON.stringify(body1);
+            //console.log(typeof JSON.stringify(body1));
+        const response = await axios.post("http://localhost:5000/users", {
+                userId: body1
+            }).then(res=>{
+                console.log(res.data);
+                
+            }).catch(err=> {
+                console.log(err);
+            })
 
-            console.log("here" + response);
+            console.log("here " + response);
             
-        } catch (err) {
-            console.error("here err" + err.message);
-        }
+        
 
-        return false;
+        setUserId("");
+
+        //return false;
     }
 
     const signup = (
@@ -159,3 +165,22 @@ export default Login;
                     
                 </InputGroup>
             </Form> */}
+
+
+            // try {
+            //     let body1 = userId;
+            //     //body1 = JSON.stringify(body1);
+            //     //console.log(typeof JSON.stringify(body1));
+            //     console.log(body1);
+    
+            //     const response = await fetch("http://localhost:5000/users", {
+            //         method: "POST",
+            //         headers: {"Content-Type":"application/json"},
+            //         body: body1
+            //     });
+    
+            //     console.log("here " + response);
+                
+            // } catch (err) {
+            //     console.error("there err" + err.message);
+            // }
