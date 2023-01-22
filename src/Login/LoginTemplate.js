@@ -52,7 +52,7 @@ const Login = (props) => {
                 <Form onSubmit={onSignUpForm}>
                     <Form.Group className="mb-3" controlId="formGroupEmail">
                         <Form.Label>Username</Form.Label>
-                        <Form.Control type="email" placeholder="Enter username" value={userId}
+                        <Form.Control type="text" placeholder="Enter username" value={userId}
                             onChange={e => setUserId(e.target.value)} />
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="formGroupPassword">
@@ -75,7 +75,7 @@ const Login = (props) => {
                 <Form onSubmit={onSignInForm}>
                     <Form.Group className="mb-3" controlId="formGroupEmail">
                         <Form.Label>Username</Form.Label>
-                        <Form.Control type="email" placeholder="Enter username" value={userId}
+                        <Form.Control type="text" placeholder="Enter username" value={loginId}
                             onChange={e => setLoginId(e.target.value)} />
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="formGroupPassword">
