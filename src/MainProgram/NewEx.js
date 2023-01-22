@@ -6,8 +6,15 @@ import { useState } from 'react';
 
 const NewEx = () => {
 
+    const [typeOp, setTypeOp] = useState("Food");
+    
     const [amountNum, setAmountNum] = useState(0);
+    const [name, setName] = useState("");
 
+    const onChangeOption = (e) => {
+        console.log(e.target.value);
+    }
+    
     const onSubmitForm = async (e) => {
         console.log(amountNum);
         e.preventDefault();
@@ -15,7 +22,9 @@ const NewEx = () => {
        
             
         const response = await axios.post("http://localhost:5000/expenses", {
-                amount: amountNum
+                amount: amountNum,
+                title: name,
+                type: typeOp
             }).then(res=>{
                 console.log(res.data);
                 
@@ -28,7 +37,8 @@ const NewEx = () => {
         
 
         setAmountNum(0);
-
+        setName("");
+        setTypeOp("");
         
     }
 
@@ -43,7 +53,7 @@ const NewEx = () => {
             <Form onSubmit={onSubmitForm}>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Product Name</Form.Label>
-                    <Form.Control className="PD_FormInputs" type="text" placeholder="Product Name" />
+                    <Form.Control className="PD_FormInputs" type="text" placeholder="Product Name" value={name} onChange={(e)=>setName(e.target.value)}/>
                     <Form.Text className="text-muted">
                         Enter the name of your expense product's name
                     </Form.Text>
@@ -58,11 +68,11 @@ const NewEx = () => {
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicCheckbox">
                     <Form.Label>Expense Type</Form.Label>
-                    <Form.Select aria-label="Default select example" >
-                        <option>Food</option>
-                        <option>Apparel</option>
-                        <option>Housing</option>
-                        <option>Misc</option>
+                    <Form.Select aria-label="Default select example" onChange={onChangeOption} >
+                        <option value="Food">Food</option>
+                        <option value="apparel">Apparel</option>
+                        <option value="Housing">Housing</option>
+                        <option value="Misc">Misc</option>
                     </Form.Select>
                     <Form.Text className="text-muted">
                         Select Expense Type
