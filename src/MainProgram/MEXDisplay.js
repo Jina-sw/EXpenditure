@@ -1,11 +1,19 @@
+<<<<<<< Updated upstream
 import { useContext, useState } from 'react';
+=======
+>>>>>>> Stashed changes
 import MonitorEx from './MonitorEx';
-import axios from 'axios';
 import './Program.css';
+<<<<<<< Updated upstream
 import { calculateContext } from '../Contexts/calculateContext';
+=======
+import { useState } from 'react';
+>>>>>>> Stashed changes
 
-const MEXDisplay = () => {
+const MEXDisplay = () =>{
+   
 
+<<<<<<< Updated upstream
     // const { calculate } = useContext(calculateContext);
     const [fAmount, setFAmount] = useState(0);
     const [aAmount, setAAmount] = useState(0);
@@ -30,15 +38,25 @@ const MEXDisplay = () => {
             console.log(err);
         });
     };
+=======
 
-    calculateAmount();
+>>>>>>> Stashed changes
+
+    
 
     return (
         <div className='MEXGrid'>
+<<<<<<< Updated upstream
             <MonitorEx icon="Food" amount={fAmount} total={total} />
             <MonitorEx icon="Clothes" amount={aAmount} total={total} />
             <MonitorEx icon="Rent" amount={rAmount} total={total} />
             <MonitorEx icon="Misc" amount={mAmount} total={total} />
+=======
+            <MonitorEx icon="Food" amount="100.00" total="400.00"/>
+            <MonitorEx icon="Clothes" amount="100.00" total="400.00"/>
+            <MonitorEx icon="House" amount="100.00" total="400.00"/>
+            <MonitorEx icon="Misc" amount="100.00" total="400.00"/>
+>>>>>>> Stashed changes
         </div>
     );
 };

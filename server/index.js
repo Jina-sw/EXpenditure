@@ -154,14 +154,18 @@ app.post("/expensesAmount", async (req, res) => {
     }
 });
 
-app.put("/expenses/:id", async (req, res) => {
+app.post("/expenses", async (req, res) => {
     try {
-        const { id } = req.params;
-        const { userid } = req.body;
-        const updateTodo = await pool.query(
-            "UPDATE userinfo SET userid = $1 WHERE id = $2", [userid, id]);
+        //const { id } = req.params;
+        const item = req.body.title;
+        const amount = req.body.amount;
+        const type = req.body.type;
+        
 
-        res.json("User Id was updated!");
+        const updateTodo = await pool.query(
+            "UPDATE expense SET amount = $1, type = $2  WHERE title = $3", [amount, type, item]);
+
+        res.json({message:"updated"});
     } catch (err) {
         console.error(err.message);
     }
