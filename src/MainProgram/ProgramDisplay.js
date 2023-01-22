@@ -13,13 +13,10 @@ const ProgramDisplay = (props) => {
     let display;
 
     if (props.displayState == "new") {
-        // setDisplay(newEx);
         display = <NewEx/>;
     } else if (props.displayState == "edit") {
-        // setDisplay(editEx);
         display = <EditEx/>;
     } else {
-        // setDisplay(monitorEx);
         display = <MEXDisplay/>;
     }
 

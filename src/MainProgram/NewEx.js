@@ -6,40 +6,38 @@ import { useState } from 'react';
 
 const NewEx = () => {
 
+    //const for type new expense
     const [typeOp, setTypeOp] = useState("Food");
-    
+    //const for expense amount
     const [amountNum, setAmountNum] = useState(0);
+    //const for expense product name
     const [name, setName] = useState("");
+    //Localstorage value for logged in user
+    const userInfo = localStorage.getItem("username");
 
     const onChangeOption = (e) => {
         console.log(e.target.value);
     }
-    
+
     const onSubmitForm = async (e) => {
         console.log(amountNum);
         e.preventDefault();
-     
-       
-            
-        const response = await axios.post("http://localhost:5000/expenses", {
-                amount: amountNum,
-                title: name,
-                type: typeOp
-            }).then(res=>{
-                console.log(res.data);
-                
-            }).catch(err=> {
-                console.log(err);
-            })
 
-            console.log("here " + response);
-            
-        
+        const response = await axios.post("http://localhost:5000/expenses", {
+            amount: amountNum,
+            title: name,
+            type: typeOp,
+            userid: userInfo
+        }).then(res => {
+            console.log(res.data);
+        }).catch(err => {
+            console.log(err);
+        })
 
         setAmountNum(0);
         setName("");
         setTypeOp("");
-        
+
     }
 
     return (
@@ -53,8 +51,13 @@ const NewEx = () => {
             <br/>
             <Form onSubmit={onSubmitForm}>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
+<<<<<<< Updated upstream
                     <Form.Label className="t">Product Name</Form.Label>
                     <Form.Control className="PD_FormInputs" type="text" placeholder="Product Name" value={name} onChange={(e)=>setName(e.target.value)}/>
+=======
+                    <Form.Label>Product Name</Form.Label>
+                    <Form.Control className="PD_FormInputs" type="text" placeholder="Product Name" value={name} onChange={(e) => setName(e.target.value)} />
+>>>>>>> Stashed changes
                     <Form.Text className="text-muted">
                         Enter the name of your expense product's name
                     </Form.Text>

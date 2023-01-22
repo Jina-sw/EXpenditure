@@ -25,9 +25,8 @@ app.post("/users", async (req, res) => {
                 [userid, userpw]
             );
 
-            res.json({ message: newUser.rows[0] + "Success!"});
+            res.json({ message: newUser.rows[0] + "Success!" });
         }
-        // res.json({message: newUser.rows[0]});
 
     } catch (err) {
         console.log(err.message);
@@ -50,12 +49,11 @@ app.get("/users/:id", async (req, res) => {
     try {
         const { id } = req.params;
         const user = await pool.query("SELECT userpw FROM userinfo WHERE userid = $1", [id]);
-        if(!(user.rows[0])){
-            res.json({message: "User does not exist"});
-        }else{
+        if (!(user.rows[0])) {
+            res.json({ message: "User does not exist" });
+        } else {
             res.json(user.rows[0]);
         }
-        // console.log(user.rows[0]);
     } catch (err) {
         console.log(err.message);
     }
@@ -94,17 +92,20 @@ app.post("/expenses", async (req, res) => {
         const amount = req.body.amount;
         const title = req.body.title;
         const type = req.body.type;
-        const newList = await pool.query("INSERT INTO expense(type, title, amount) VALUES($1, $2, $3) RETURNING *",
-            [type, title, amount]
+        const userName = req.body.userid;
+
+        const foundUser = await pool.query("SELECT * FROM userinfo WHERE userid = $1 AND title = $2",
+            [userName, title]
         );
-        // const newTitle = await pool.query("INSERT INTO expense(title) VALUES($1) RETURNING *",
-        //     [title]
-        // );
 
-
-        res.json(newAmount.rows[0]);
-        res.json(newTitle.rows[0]);
-        res.json(typeSaved.rows[0]);
+        if (!(foundUser.rows[0])) {
+            res.json({ message: "Please Enter a different expense name. This expense name exists" });
+        } else {
+            const newList = await pool.query("INSERT INTO expense(type, title, amount, userid) VALUES($1, $2, $3, $4) RETURNING *",
+                [type, title, amount, userName]
+            );
+            res.json({ message: "Success" });
+        }
 
     } catch (err) {
         console.log(err.message);
