@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=DM+Serif+Display:ital@0;1&family=Frank+Ruhl+Libre:wght@500;800&family=Tiro+Bangla&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Inter&family=Merriweather&family=PT+Serif:ital@1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@600;700&family=PT+Serif:wght@700&display=swap');
 
 .area {
     background-color: rgb(18, 44, 92);
@@ -17,4 +18,48 @@
     font-weight: 500;
     font-size: 3rem;
     font-family: 'Tiro Bangla';
+}
+
+.infoBG {
+    
+    font-size: 25px;
+    
+}
+
+.b {
+    font-family: 'Inter';
+    font-weight: 600;
+    font-size: 50px;
+    text-align: center;
+    
+}
+
+.intro {
+    text-align: center;
+    font-size: 20px;
+}
+
+.content_title {
+    font-size: 35px;
+    padding: 2rem;
+}
+
+.content_container {
+    display: flex;
+    flex-direction : column;
+    border-radius: 10px;
+    margin: 2rem;
+    background-color: #e7eaf6;;
+    
+    
+}
+
+.drawer {
+    display: flex;
+    flex-direction: row;
+    font-family: 'Merriweather';
+}
+
+img {
+    margin: 1rem;
 }
