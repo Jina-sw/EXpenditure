@@ -12,9 +12,10 @@ app.use(express.json()); //req.body
 //create a userinfo
 app.post("/users", async (req, res) => {
     try {
-        const userid  = req.body.userId;
-        const newUser = await pool.query("INSERT INTO userInfo(userid) VALUES($1) RETURNING *",
-            [userid]
+        const userid = req.body.userId;
+        const userpw = req.body.userPw;
+        const newUser = await pool.query("INSERT INTO userInfo(userid, userpw) VALUES($1, $2) RETURNING *",
+            [userid, userpw]
         );
 
         res.json(newUser.rows[0]);
@@ -77,7 +78,7 @@ app.delete("/users/:id", async (req, res) => {
 //save a expense
 app.post("/expenses", async (req, res) => {
     try {
-        const amount  = req.body.amount;
+        const amount = req.body.amount;
         //const title = req.body.title;
         const newAmount = await pool.query("INSERT INTO expense(amount) VALUES($1) RETURNING *",
             [amount]
@@ -85,7 +86,7 @@ app.post("/expenses", async (req, res) => {
         // const newTitle = await pool.query("INSERT INTO expense(title) VALUES($1) RETURNING *",
         //     [title]
         // );
-        
+
 
         res.json(newAmount.rows[0]);
         //res.json(newTitle.rows[0]);

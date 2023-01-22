@@ -8,7 +8,7 @@ function Main() {
     return (
         <div>
             <div className="area">
-                <div className="slogan">EXpenditure, <br></br>Your Best Finacial Support</div>
+                <div className="slogan"><span className="HLLogo">EX</span>penditure, <br></br>Your Best Finacial Support</div>
                 <LinkContainer to="/signin">
                     <Button variant="warning" className="signButton">Sign In</Button>
                 </LinkContainer>

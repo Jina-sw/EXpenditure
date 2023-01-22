@@ -10,7 +10,7 @@
     height: 100%;
 }
 
-.MPSideNavButtons{
+.MPSideNavButtons {
     color: black;
     cursor: pointer;
     width: 100%;
@@ -21,7 +21,7 @@
     margin-bottom: 30px;
 }
 
-.MPSideNavButtons:hover{
+.MPSideNavButtons:hover {
     background-color: #a2a8d3;
 }
 
