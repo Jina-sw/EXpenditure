@@ -28,7 +28,7 @@ const MonitorEx = (props) => {
                     {`$ ${props.amount}`}
                 </h2>
                 <h2 className='MEXPricings desc'>
-                    {`${(props.amount / props.total) * 100} % of the total expense`}
+                    {`${((props.amount / props.total)* 100).toFixed(2)} % of the total expense`}
                 </h2>
             </div>
         </div>

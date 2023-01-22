@@ -10,14 +10,18 @@ const SideNav = (props) => {
 
     const { calculate, setCalculate } = useContext(calculateContext);
 
-    const calculateAmount = async () => {
-        const url = "http://localhost:5000";
-        const userId = localStorage.getItem("username");
-        console.log(userId);
-        const res = await axios.get(`${url}/expensesAmount/${userId}`);
-        console.log(res.data.message);
-        setCalculate({ ...calculate, fAmount: res.data.message });
-    }
+    // const calculateAmount = async () => {
+    //     const url = "http://localhost:5000";
+    //     const user = localStorage.getItem("username");
+    //     const res = await axios.post(`${url}/expensesAmount`, {
+    //         userId: user
+    //     }).then(res => {
+    //         console.log(res.data.message);
+    //         setCalculate({ fAmount: res.data.message });
+    //     }).catch(err => {
+    //         console.log(err);
+    //     });
+    // }
 
     const NewEXClickHandler = () => {
         if (newExState != true) {
@@ -41,7 +45,7 @@ const SideNav = (props) => {
             setEEState(false);
             setMState(true);
             props.setDisplay("monitor");
-            calculateAmount();
+            // calculateAmount();
         }
     };
 

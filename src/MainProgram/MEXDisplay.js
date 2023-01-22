@@ -6,14 +6,39 @@ import { calculateContext } from '../Contexts/calculateContext';
 
 const MEXDisplay = () => {
 
-    const { calculate } = useContext(calculateContext);
+    // const { calculate } = useContext(calculateContext);
+    const [fAmount, setFAmount] = useState(0);
+    const [aAmount, setAAmount] = useState(0);
+    const [rAmount, setRAmount] = useState(0);
+    const [mAmount, setMAmount] = useState(0);
+    const [total, setTotal] = useState(0);
+
+    const calculateAmount = async () => {
+        const url = "http://localhost:5000";
+        const user = localStorage.getItem("username");
+        const res = await axios.post(`${url}/expensesAmount`, {
+            userId: user
+        }).then(res => {
+            setFAmount(res.data.food);
+            setAAmount(res.data.clothes);
+            setRAmount(res.data.rent);
+            setMAmount(res.data.misc);
+            setTotal(parseInt(res.data.tot));
+            console.log(res.data.total);
+
+        }).catch(err => {
+            console.log(err);
+        });
+    };
+
+    calculateAmount();
 
     return (
         <div className='MEXGrid'>
-            <MonitorEx icon="Food" amount={calculate.setFAmount} total="400.00" />
-            <MonitorEx icon="Clothes" amount="100.00" total="400.00" />
-            <MonitorEx icon="Rent" amount="100.00" total="400.00" />
-            <MonitorEx icon="Misc" amount="100.00" total="400.00" />
+            <MonitorEx icon="Food" amount={fAmount} total={total} />
+            <MonitorEx icon="Clothes" amount={aAmount} total={total} />
+            <MonitorEx icon="Rent" amount={rAmount} total={total} />
+            <MonitorEx icon="Misc" amount={mAmount} total={total} />
         </div>
     );
 };

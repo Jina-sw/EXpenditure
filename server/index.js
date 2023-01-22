@@ -45,7 +45,7 @@ app.get("/users", async (req, res) => {
 
 //get a userinfos
 
-app.get("/users/:id", async (req, res) => {
+app.post("/users/:id", async (req, res) => {
     try {
         const { id } = req.params;
         const user = await pool.query("SELECT userpw FROM userinfo WHERE userid = $1", [id]);
@@ -112,31 +112,42 @@ app.post("/expenses", async (req, res) => {
     }
 })
 
-app.get("/expensesAmount/:userId", async (req, res) => {
+app.post("/expensesAmount", async (req, res) => {
     try {
-        const { id1 } = req.params;
+        const id1 = req.body.userId;
         let fAmount = 0;
-        let cAmount = 0;
+        let aAmount = 0;
         let rAmount = 0;
         let mAmount = 0;
         let total = 0;
 
-        console.log(id1);
+        // console.log(id1);
 
-        const user = await pool.query("SELECT * FROM expense WHERE userid = $1", [{ id1 }]);
+        const user = await pool.query("SELECT * FROM expense WHERE userid = $1", [id1]);
         if (!(user.rows)) {
             res.json({ message: "None" });
         } else {
             const fQuery = await pool.query("SELECT amount FROM expense WHERE userid = $1 AND type = $2", [id1, "Food"]);
-            let i = 0;
-            console.log(fQuery.rows[0]);
+            const aQuery = await pool.query("SELECT amount FROM expense WHERE userid = $1 AND type = $2", [id1, "Apparel"]);
+            const rQuery = await pool.query("SELECT amount FROM expense WHERE userid = $1 AND type = $2", [id1, "Housing"]);
+            const mQuery = await pool.query("SELECT amount FROM expense WHERE userid = $1 AND type = $2", [id1, "Misc"]);
 
-            while (fQuery.rows.amount) {
-                fAmount += fQuery.rows[i].amount;
-                console.log(fQuery.rows[i].amount);
-                i += 1;
+            for (let i = 0; i < fQuery.rows.length; i++) {
+                fAmount += parseInt(fQuery.rows[i].amount);
             }
-            res.json({ message: fAmount });
+            for (let i = 0; i < aQuery.rows.length; i++) {
+                aAmount += parseInt(aQuery.rows[i].amount);
+            }
+            for (let i = 0; i < rQuery.rows.length; i++) {
+                rAmount += parseInt(rQuery.rows[i].amount);
+            }
+            for (let i = 0; i < mQuery.rows.length; i++) {
+                mAmount += parseInt(mQuery.rows[i].amount);
+            }
+
+            total = fAmount + aAmount + rAmount + mAmount;
+
+            res.json({ food: fAmount, clothes: aAmount, rent: rAmount, misc: mAmount, tot: total });
         }
     } catch (err) {
         console.log(err.message);
