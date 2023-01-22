@@ -48,16 +48,13 @@ const NewEx = () => {
             <h2 className='EXH2'>
                 Add new expense!
             </h2>
-            <br/>
+            <br />
             <Form onSubmit={onSubmitForm}>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
-<<<<<<< Updated upstream
+
                     <Form.Label className="t">Product Name</Form.Label>
-                    <Form.Control className="PD_FormInputs" type="text" placeholder="Product Name" value={name} onChange={(e)=>setName(e.target.value)}/>
-=======
-                    <Form.Label>Product Name</Form.Label>
                     <Form.Control className="PD_FormInputs" type="text" placeholder="Product Name" value={name} onChange={(e) => setName(e.target.value)} />
->>>>>>> Stashed changes
+
                     <Form.Text className="text-muted">
                         Enter the name of your expense product's name
                     </Form.Text>
