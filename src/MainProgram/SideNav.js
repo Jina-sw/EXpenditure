@@ -6,20 +6,24 @@ const SideNav = (props) => {
     const [editExState, setEEState] = useState(false);
     const [MonitorState, setMState] = useState(false);
 
-    const functionClickHandler = (id) => {
-        if (id == "1" && newExState != true) {
+    const NewEXClickHandler = () => {
+        if (newExState != true) {
             setNEState(true);
             setEEState(false);
             setMState(false);
             props.setDisplay("new");
         }
-        else if (id == "2" && editExState != true) {
+    };
+    const EditExHandler = () => {
+        if (editExState != true) {
             setNEState(false);
             setEEState(true);
             setMState(false);
             props.setDisplay("edit");
         }
-        else if (id == "3" && MonitorState != true) {
+    };
+    const MonitorHandler = () => {
+        if (MonitorState != true) {
             setNEState(false);
             setEEState(false);
             setMState(true);
@@ -29,16 +33,17 @@ const SideNav = (props) => {
 
     return (
         <div className="mainProgramSideNav">
-            <div className={newExState ? "MPSideNavButtons MPSideNavButtonsSelected" : "MPSideNavButtons"}
-                onClick={functionClickHandler("1")}>
-                New Expenses
+            <div className={newExState ? "MPSideNavButtons MPSideNavButtonSelected" : "MPSideNavButtons"}
+                onClick={NewEXClickHandler}>
+                New Expenses 
+                {/* {newExState ? "true" : "false"} */}
             </div>
-            <div className={editExState ? "MPSideNavButtons MPSideNavButtonsSelected" : "MPSideNavButtons"}
-                onClick={functionClickHandler("2")}>
+            <div className={editExState ? "MPSideNavButtons MPSideNavButtonSelected" : "MPSideNavButtons"}
+                onClick={EditExHandler}>
                 Edit Expenses
             </div>
-            <div className={MonitorState ? "MPSideNavButtons MPSideNavButtonsSelected" : "MPSideNavButtons"}
-                onClick={functionClickHandler("3")}>
+            <div className={MonitorState ? "MPSideNavButtons MPSideNavButtonSelected" : "MPSideNavButtons"}
+                onClick={(MonitorHandler)}>
                 Monitor Spending
             </div>
         </div>
