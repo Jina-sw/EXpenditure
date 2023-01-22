@@ -16,7 +16,7 @@ app.post("/users", async (req, res) => {
         const userpw = req.body.userPw;
 
         const existingUser = await pool.query("SELECT * FROM userInfo WHERE userid = $1", [userid]);
-        console.log(existingUser);
+
         if (existingUser.rows[0]) {
             res.json({ message: "User exists!" });
         } else {
@@ -45,14 +45,15 @@ app.get("/users", async (req, res) => {
 
 //get a userinfos
 
-app.post("/users/:id", async (req, res) => {
+app.get("/users/:id", async (req, res) => {
     try {
         const { id } = req.params;
+
         const user = await pool.query("SELECT userpw FROM userinfo WHERE userid = $1", [id]);
         if (!(user.rows[0])) {
             res.json({ message: "User does not exist" });
         } else {
-            console.log(user.rows[0]);
+
             res.json(user.rows[0]);
         }
     } catch (err) {
@@ -98,6 +99,7 @@ app.post("/expenses", async (req, res) => {
         const foundUser = await pool.query("SELECT * FROM expense WHERE userid = $1 AND title = $2",
             [userName, title]
         );
+
         if (foundUser.rows[0] == undefined) {
             const newList = await pool.query("INSERT INTO expense(type, title, amount, userid) VALUES($1, $2, $3, $4) RETURNING *",
                 [type, title, amount, userName]
@@ -115,13 +117,13 @@ app.post("/expenses", async (req, res) => {
 app.post("/expensesAmount", async (req, res) => {
     try {
         const id1 = req.body.userId;
+
         let fAmount = 0;
         let aAmount = 0;
         let rAmount = 0;
         let mAmount = 0;
         let total = 0;
 
-        // console.log(id1);
 
         const user = await pool.query("SELECT * FROM expense WHERE userid = $1", [id1]);
         if (!(user.rows)) {
@@ -154,22 +156,41 @@ app.post("/expensesAmount", async (req, res) => {
     }
 });
 
-app.post("/expenses", async (req, res) => {
+app.post("/expenses/edit", async (req, res) => {
     try {
         //const { id } = req.params;
         const item = req.body.title;
-        const amount = req.body.amount;
+        const amount = (parseInt(req.body.amount)).toFixed(2);
         const type = req.body.type;
-        
 
-        const updateTodo = await pool.query(
-            "UPDATE expense SET amount = $1, type = $2  WHERE title = $3", [amount, type, item]);
+        console.log(amount + "  " + type);
 
-        res.json({message:"updated"});
+        const foundItem = await pool.query("SELECT amount, type FROM expense WHERE title = $1", [item]);
+        if (foundItem) {
+
+            const updateTodo = await pool.query(
+                "UPDATE expense SET amount = $1, type = $2  WHERE title = $3",
+                [amount, type, item]
+            );
+
+            const updatedItem = await pool.query("SELECT amount, type FROM expense WHERE title = $1", [item]);
+            const updatedAmount = updatedItem.rows[0].amount;
+            const updatedType = updatedItem.rows[0].type;
+
+            console.log(updatedAmount + "  "  + updatedType);
+
+            if (amount == updatedAmount && type == updatedType) {
+                res.json({ message: "updated" });
+            } else {
+                res.json({ message: "failed" });
+            }
+
+        }
+
     } catch (err) {
         console.error(err.message);
     }
-})
+});
 
 app.listen(5000, () => {
     console.log("server has started on port 5000")

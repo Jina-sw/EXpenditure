@@ -32,6 +32,8 @@ const MEXDisplay = () =>{
         });
     };
 
+    calculateAmount();
+
     
 
     return (

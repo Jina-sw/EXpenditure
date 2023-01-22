@@ -29,6 +29,7 @@ const NewEx = () => {
             userid: userInfo
         }).then(res => {
             if(res.data.message == "Success"){
+                console.log(res.data.message);
                 alert("Successfully Added!");
             }else{
                 alert(res.data.message);

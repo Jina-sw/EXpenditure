@@ -6,8 +6,6 @@ import axios from 'axios';
 
 const EditEx = () => {
 
-  
-
     const [input, setInput] = useState("");
     const [newAmount, setNewAmount] = useState(0);
     const [newType, setNewType] = useState("");
@@ -19,15 +17,14 @@ const EditEx = () => {
     const onSubmitForm = async (e) => {
         e.preventDefault();
 
-        const response = await axios.post("http://localhost:5000/expenses", {
+        const response = await axios.post("http://localhost:5000/expenses/edit", {
             amount: newAmount,
             title: input,
-            type: newType,
-            
+            type: newType
         }).then(res => {
-            if(res.data.message == "updated"){
+            if (res.data.message == "updated") {
                 alert("Successfully Edited!");
-            }else{
+            } else {
                 alert(res.data.message);
             }
             // console.log(res.data.message);
@@ -42,7 +39,7 @@ const EditEx = () => {
         setNewType("");
 
     }
-    
+
     return (
         <div>
             <h1 className='EXH1'>
@@ -51,12 +48,12 @@ const EditEx = () => {
             <h2 className='EXH2'>
                 Make sure to enter the correct product name and edit price and type of the expense.
             </h2>
-            <br/>
+            <br />
             <Form onSubmit={onSubmitForm}>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Product Name</Form.Label>
                     <Form.Control className="PD_FormInputs" type="text" placeholder="Product Name" value={input}
-                    onChange={(e)=>setInput(e.target.value)} />
+                        onChange={(e) => setInput(e.target.value)} />
                     <Form.Text className="text-muted">
                         Enter the name of your expense product's name
                     </Form.Text>
@@ -64,7 +61,7 @@ const EditEx = () => {
 
                 <Form.Group className="mb-3" controlId="formBasicPassword">
                     <Form.Label>Price Amount</Form.Label>
-                    <Form.Control type="number" placeholder="12.99" value={newAmount} onChange={(e)=>setNewAmount(e.target.value)} />
+                    <Form.Control type="number" placeholder="12.99" value={newAmount} onChange={(e) => setNewAmount(e.target.value)} />
                     <Form.Text className="text-muted">
                         Enter the price of the item
                     </Form.Text>
