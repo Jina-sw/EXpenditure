@@ -20,7 +20,6 @@ const NewEx = () => {
     }
 
     const onSubmitForm = async (e) => {
-        console.log(amountNum);
         e.preventDefault();
 
         const response = await axios.post("http://localhost:5000/expenses", {
@@ -29,7 +28,7 @@ const NewEx = () => {
             type: typeOp,
             userid: userInfo
         }).then(res => {
-            console.log(res.data);
+            console.log(res.data.message);
         }).catch(err => {
             console.log(err);
         })

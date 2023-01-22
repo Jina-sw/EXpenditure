@@ -94,17 +94,19 @@ app.post("/expenses", async (req, res) => {
         const type = req.body.type;
         const userName = req.body.userid;
 
-        const foundUser = await pool.query("SELECT * FROM userinfo WHERE userid = $1 AND title = $2",
+        console.log(req.body.type);
+
+        const foundUser = await pool.query("SELECT * FROM expense WHERE userid = $1 AND title = $2",
             [userName, title]
         );
-
-        if (!(foundUser.rows[0])) {
-            res.json({ message: "Please Enter a different expense name. This expense name exists" });
-        } else {
+        console.log(foundUser.rows[0]);
+        if (foundUser.rows[0] == undefined) {
             const newList = await pool.query("INSERT INTO expense(type, title, amount, userid) VALUES($1, $2, $3, $4) RETURNING *",
                 [type, title, amount, userName]
             );
             res.json({ message: "Success" });
+        } else {
+            res.json({ message: "Please Enter a different expense name. This expense name exists" });
         }
 
     } catch (err) {
