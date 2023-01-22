@@ -24,7 +24,9 @@ const Login = (props) => {
     //Navigate constant
     const navigate = useNavigate();
 
+    //Login Handler that helps users to log in
     const loginHandler = () => {
+        alert("You will stay logged in until you manually log out");
         setLoggedIn(true);
         localStorage.setItem('login', 'true');
         localStorage.setItem('username', loginId);
@@ -57,6 +59,11 @@ const Login = (props) => {
         })
     };
 
+    const signInDefault = () => {
+        setLoginId("");
+        setLoginPw("");
+    };
+
     const onSignInForm = async (e) => {
         e.preventDefault();
 
@@ -69,8 +76,10 @@ const Login = (props) => {
             loginHandler();
         } else if (login.data.message == "User does not exist") {
             alert("Incorrect username! Please check again");
+            signInDefault();
         } else {
             alert("Incorrect password! Please check again");
+            signInDefault();
         }
 
     };
