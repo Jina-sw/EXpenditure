@@ -7,7 +7,7 @@
 A finance management app for individuals who want to manage their monthly expenses. To use this app, a user need to sign up to sign in as this program remembers data by a "user id" to offer customized experiences. A user can save, edit and see the categorized graph representing the result of monthly expenses grouped by the user. In this app, we suggest 4 different categories such as Food, Housing, Clothing, and Misc.
 
 # Tech Stacks
-- MongoDB, Express.js, React, Node.js (MERN)
+- PostgreSQL, Express.js, React, Node.js
 - Amazon Web Services (AWS) -> Amplify
   
 # Accomplishments we are proud of
